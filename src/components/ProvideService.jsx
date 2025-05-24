@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import { auth } from '../firebase/config';
 import { createService } from '../firebase/services';
 import { getUserProfile } from '../firebase/users';
+import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -34,6 +35,7 @@ function LocationMarker({ position, onLocationUpdate }) {
 }
 
 const ProvideService = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     serviceType: '',
     title: '',
@@ -186,7 +188,7 @@ const ProvideService = () => {
         throw new Error(serviceError);
       }
 
-      setSuccess('Service successfully added! Service ID: ' + id);
+      setSuccess('Service successfully added!');
       
       // Reset form
       setFormData({
@@ -212,6 +214,12 @@ const ProvideService = () => {
         }
       });
       setMarkerPosition(null);
+
+      // Navigate to homepage after 2 seconds
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+
     } catch (err) {
       console.error('Error in handleSubmit:', err);
       setError(err.message || 'An error occurred while creating the service');
@@ -240,6 +248,9 @@ const ProvideService = () => {
             <option value="carpentry">Carpentry</option>
             <option value="painting">Painting</option>
             <option value="gardening">Gardening</option>
+            <option value="tuition">Tuition</option>
+            <option value="taxi">Taxi Driver</option>
+            <option value="cook">Cook</option>
             <option value="other">Other</option>
           </select>
         </div>

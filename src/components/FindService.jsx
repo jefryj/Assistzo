@@ -448,6 +448,9 @@ const FindService = () => {
               <option value="carpentry">Carpentry</option>
               <option value="painting">Painting</option>
               <option value="gardening">Gardening</option>
+              <option value="tuition">Tuition</option>
+              <option value="taxi">Taxi Driver</option>
+              <option value="cook">Cook</option>
             </select>
 
             <select
