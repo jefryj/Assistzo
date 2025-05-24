@@ -1,0 +1,181 @@
+.service-requests-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-requests-container h1 {
+  color: #2d3748;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.loading,
+.error,
+.no-requests {
+  text-align: center;
+  padding: 40px;
+  color: #4a5568;
+  font-size: 18px;
+}
+
+.error {
+  color: #e53e3e;
+}
+
+.requests-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.request-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.request-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.request-header h3 {
+  margin: 0;
+  color: #2d3748;
+  font-size: 18px;
+}
+
+.request-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #718096;
+  font-size: 14px;
+}
+
+.request-details {
+  margin-bottom: 20px;
+}
+
+.customer-info,
+.booking-info {
+  margin-bottom: 15px;
+}
+
+.customer-info h4,
+.booking-info h4 {
+  color: #4a5568;
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.customer-info p,
+.booking-info p {
+  margin: 5px 0;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.special-requests {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.special-requests h5 {
+  margin: 0 0 8px 0;
+  color: #4a5568;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.special-requests p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.request-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.accept-button,
+.reject-button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.accept-button {
+  background-color: #48bb78;
+  color: white;
+}
+
+.accept-button:hover {
+  background-color: #38a169;
+}
+
+.reject-button {
+  background-color: #f56565;
+  color: white;
+}
+
+.reject-button:hover {
+  background-color: #e53e3e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .requests-list {
+    grid-template-columns: 1fr;
+  }
+
+  .request-card {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-requests-container {
+    padding: 15px;
+  }
+
+  .request-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .request-actions {
+    flex-direction: column;
+  }
+} 

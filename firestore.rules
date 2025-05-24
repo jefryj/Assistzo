@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow users to read their own profile
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Allow users to read and write their own detailed profile
+    match /userProfiles/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Rules for services collection
+    match /services/{serviceId} {
+      // Allow authenticated users to create services
+      allow create: if request.auth != null && 
+                      request.resource.data.providerId == request.auth.uid;
+      
+      // Allow providers to update their own services
+      allow update: if request.auth != null && 
+                      (resource.data.providerId == request.auth.uid ||
+                       // Allow rating updates
+                       (request.resource.data.diff(resource.data).affectedKeys()
+                         .hasOnly(['totalRatings', 'averageRating'])));
+      
+      // Allow providers to delete their own services
+      allow delete: if request.auth != null && 
+                      resource.data.providerId == request.auth.uid;
+      
+      // Allow all authenticated users to read services
+      allow read: if request.auth != null;
+    }
+
+    // Rules for bookings collection
+    match /bookings/{bookingId} {
+      // Allow authenticated users to create bookings
+      allow create: if request.auth != null;
+      
+      // Allow users to read their own bookings (as provider or customer)
+      allow read: if request.auth != null && 
+        (resource.data.providerId == request.auth.uid || resource.data.customerId == request.auth.uid);
+      
+      // Allow service providers to update booking status
+      allow update: if request.auth != null && 
+                      (resource.data.providerId == request.auth.uid || 
+                       resource.data.customerId == request.auth.uid);
+    }
+
+    // Rules for ratings collection
+    match /ratings/{ratingId} {
+      // Allow authenticated users to create ratings
+      allow create: if request.auth != null;
+      
+      // Allow users to read all ratings
+      allow read: if request.auth != null;
+      
+      // Allow users to update their own ratings
+      allow update: if request.auth != null && 
+                      resource.data.customerId == request.auth.uid;
+      
+      // Allow users to delete their own ratings
+      allow delete: if request.auth != null && 
+                      resource.data.customerId == request.auth.uid;
+    }
+  }
+} 
