@@ -20,6 +20,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
     }
+  },
+  preview: {
+    allowedHosts: [
+      "assistzo.onrender.com"
+    ]
   }
 })
 
