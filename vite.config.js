@@ -15,11 +15,11 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['leaflet', 'react-icons']
+    include: ['leaflet']
   },
   build: {
     rollupOptions: {
-      external: ['react-icons']
     }
   }
 })
+
